@@ -5,7 +5,7 @@ Terribly Tiny Tales Test Website
 A Node.js app using [Express](http://expressjs.com/).
 The application fetches a list of top N frequent words from a .txt file [file](http://terriblytinytales.com/test.txt).
 
-The running demo of the web application is available on this link [https://ttt-test-webapp.herokuapp.com/](https://ttt-test-webapp.herokuapp.com/).
+The running demo of the web application is available on this link [https://terribly-tiny-tales-app.herokuapp.com//](https://terribly-tiny-tales-app.herokuapp.com//).
 
 ## How to run locally
 ```sh
