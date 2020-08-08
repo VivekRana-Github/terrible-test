@@ -17,6 +17,7 @@ npm start
 Your app should now be running on [localhost:3000](http://localhost:3000/).
 
 ## Test Cases Screenshots
+
 ![](public/t1.png)
 
 ![](public/t2.png)
@@ -24,6 +25,8 @@ Your app should now be running on [localhost:3000](http://localhost:3000/).
 ![](public/t3.png)
 
 ![](public/t4.png)
+
+
 
 ## Deploying to Heroku
 
@@ -33,9 +36,7 @@ git push heroku master
 heroku open
 ```
 
-Alternatively, you can deploy your own copy of the app using the web-based flow:
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 
 ## NodeJS Libraries
