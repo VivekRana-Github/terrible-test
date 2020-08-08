@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+</head>
+
+<body style="background: url(background.jpg);">
+    <div class="container">
+        <div class="row">            
+            <h1 style="font-weight: 10px;text-align: center;padding: 15px; ">N most frequent words and their frequencies</h1>
+            <div ng-app="myApp" ng-controller="appCtrl">
+                <div class="form-group">
+                    <input type="text" placeholder="Enter a number here" ng-model="number" class="form-control" id="number">
+                </div>
+                <div style="margin-top: -15px;">
+                    <button type="button" class="btn btn-primary form-control" ng-click="getData()" style="background-color:#33919a;">Go</button>
+                </div>
+                <hr/>
+                <div class="container">
+                <table class="table table-striped">
+                    <thead style="background-color: #48a8b1;">
+                        <tr>
+                            <th class="col-md-6" style="text-align: center; border-width: 5px;">Word</th>
+                            <th class="col-md-6" style="text-align: center;border-width: 5px;">Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in names.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                            <td class="col-md-6" style="text-align:center;">{{ x.id }}</td>
+                            <td class="col-md-6" style="text-align:center;">{{ x.weight }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"  max-size="maxSize"  class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+            </div>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myApp', ['ui.bootstrap']);
+        app.controller('appCtrl', function($scope, $http) {
+        //pagination config
+        $scope.viewby = 10;
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = 10;
+        $scope.maxSize = 10;
+
+        $scope.setPage = function(pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.setItemsPerPage = function(num) {
+            $scope.itemsPerPage = num;
+            $scope.currentPage = 1; //reset to first page
+        }
+
+        //fetch top N frequent words
+        $scope.getData = function() {
+            $http.get("/words/" + $scope.number)
+            .then(function(response) {
+                $scope.names = response.data;
+                $scope.totalItems = response.data.length;
+            });
+        }
+
+
+    });
+</script>
+</body>
+
+</html>
